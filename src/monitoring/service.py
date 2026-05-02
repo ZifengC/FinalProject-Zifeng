@@ -1,9 +1,4 @@
-"""Final project FastAPI service backbone.
-
-Milestone 5 provides the production-service pattern. The needed Milestone 6
-RAG source files and knowledge-base documents have been migrated into this
-standalone final project.
-"""
+"""Final project FastAPI service backbone."""
 from __future__ import annotations
 
 import json
@@ -67,7 +62,7 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(
     title="Final Project RAG Service",
-    description="FastAPI backbone wrapping the Milestone 6 RAG system.",
+    description="FastAPI backbone wrapping the local RAG system.",
     version="0.1.0",
     lifespan=lifespan,
 )
@@ -149,7 +144,7 @@ async def component4_drift_load_status() -> DriftStatusResponse:
 
 @app.post("/rag/query", response_model=RAGQueryResponse)
 async def rag_query(request: RAGQueryRequest) -> RAGQueryResponse:
-    """Answer a question with Milestone 6 retrieval and grounded generation."""
+    """Answer a question with retrieval and grounded generation."""
     if rag_service is None:
         raise HTTPException(status_code=503, detail="RAG endpoint is disabled in drift-only mode.")
     endpoint = "/rag/query"

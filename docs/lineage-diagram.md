@@ -1,4 +1,4 @@
-# Component 3 Lineage Diagram
+# Lineage Diagram
 
 ## System Lineage
 
@@ -80,7 +80,7 @@ Trace logging
 | Data | `src/monitoring/documents` | Defines knowledge scope and data sensitivity boundary |
 | Training | No local LLM training; pretrained Qwen and MiniLM are used | Must document inherited model limitations |
 | Indexing | `src/monitoring/rag_pipeline.py` chunking, embeddings, FAISS index | Determines retrieval quality and context scope |
-| Evaluation | Milestone 6 RAG evaluation and agent traces | Measures retrieval, groundedness, latency, and failure modes |
+| Evaluation | RAG evaluation set and agent traces | Measures retrieval, groundedness, latency, and failure modes |
 | Deployment | `src/monitoring/service.py` FastAPI app | Exposes RAG and agent endpoints |
 | Monitoring | Prometheus/Grafana Component 1 dashboard | Tracks latency, errors, input integrity, drift proxy, retrieval quality |
 | Experimentation | Component 2 A/B simulation | Supports configuration recommendation with statistical reasoning |

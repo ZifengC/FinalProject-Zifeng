@@ -6,7 +6,7 @@
 |---|---|
 | System name | Final Project RAG/Agent Assistant |
 | Version | `finalproject-rag-agent-v1` |
-| Primary capability | Grounded question answering and lightweight agentic task execution over a small course knowledge base |
+| Primary capability | Grounded question answering and lightweight agentic task execution over a small curated knowledge base |
 | Base LLM | `qwen2.5:7b` served locally through Ollama |
 | Embedding model | `sentence-transformers/all-MiniLM-L6-v2` |
 | Retriever | FAISS `IndexFlatIP` over normalized embeddings |
@@ -30,7 +30,7 @@ Markdown knowledge base in `src/monitoring/documents`.
 
 Appropriate uses:
 
-- Course project demonstration of an observable LLM/RAG service.
+- Demonstration of an observable local LLM/RAG service.
 - Grounded Q&A over the provided non-sensitive documents.
 - Local experimentation with retrieval metrics, monitoring, and governance.
 - Agent trace inspection for simple summarization, extraction, and reasoning
@@ -68,7 +68,7 @@ a broad production knowledge base.
 
 ## Evaluation Data
 
-The Milestone 6 evaluation set contains 10 hand-written questions aligned to
+The evaluation set contains 10 hand-written questions aligned to
 the 10 local documents. Each question includes expected relevant source files.
 The evaluation measures retrieval quality, generation groundedness, and latency.
 
@@ -82,7 +82,7 @@ traffic.
 
 ## Performance Metrics
 
-Milestone 6 RAG evaluation:
+RAG evaluation:
 
 | Metric | Result |
 |---|---:|
@@ -177,7 +177,7 @@ Implemented controls:
 - Prometheus metrics endpoint.
 - Grafana dashboard for throughput, errors, latency, input anomalies, retrieval
   quality, agent depth, and PSI-style input-length drift.
-- Structured agent traces in the Milestone 6 source workflow.
+- Structured agent traces in the service workflow.
 - Offline A/B simulation with guardrail metrics.
 
 Recommended production controls:

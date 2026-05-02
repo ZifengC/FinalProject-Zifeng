@@ -1,4 +1,4 @@
-"""Service wrapper for the migrated multi-tool agent."""
+"""Service wrapper for the local multi-tool agent."""
 from __future__ import annotations
 
 import time
@@ -26,7 +26,7 @@ class AgentService:
         dry_run: bool = False,
         plan_only: bool = False,
     ) -> dict[str, Any]:
-        """Run one task through the migrated Milestone 6 agent controller."""
+        """Run one task through the local agent controller."""
         start = time.perf_counter()
         self.total_runs += 1
 
@@ -48,7 +48,7 @@ class AgentService:
 
         result["tool_path"] = [step["tool"] for step in result["steps"]]
         result["metadata"] = {
-            "source_system": "FinalProject migrated Milestone 6 agent",
+            "source_system": "FinalProject local agent",
             "documents_dir": str(DOCUMENTS_DIR),
             "top_k": top_k,
             "dry_run": dry_run,

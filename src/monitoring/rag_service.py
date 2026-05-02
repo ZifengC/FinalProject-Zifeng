@@ -1,4 +1,4 @@
-"""Thin service wrapper around the migrated RAG pipeline."""
+"""Thin service wrapper around the RAG pipeline."""
 from __future__ import annotations
 
 import time
@@ -12,7 +12,7 @@ DOCUMENTS_DIR = MONITORING_ROOT / "documents"
 
 
 class RAGService:
-    """Manage one in-memory Milestone 6 RAG pipeline instance."""
+    """Manage one in-memory RAG pipeline instance."""
 
     def __init__(
         self,
@@ -31,7 +31,7 @@ class RAGService:
         return self.pipeline is not None
 
     def load(self) -> None:
-        """Initialize embeddings, chunks, and FAISS index from Milestone 6 documents."""
+        """Initialize embeddings, chunks, and FAISS index from local documents."""
         if self.pipeline is not None:
             return
 
@@ -46,7 +46,7 @@ class RAGService:
         model: str | None = None,
         skip_generation: bool = False,
     ) -> dict[str, Any]:
-        """Answer a query using the Milestone 6 RAG implementation."""
+        """Answer a query using the local RAG implementation."""
         if self.pipeline is None:
             self.load()
 
@@ -72,7 +72,7 @@ class RAGService:
             existing_metadata = {}
         result["metadata"] = {
             **existing_metadata,
-            "source_system": "FinalProject migrated Milestone 6 RAG",
+            "source_system": "FinalProject local RAG",
             "documents_dir": str(self.documents_dir),
             "model": model or self.default_model,
             "top_k": top_k,

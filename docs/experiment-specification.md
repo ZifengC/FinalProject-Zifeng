@@ -13,8 +13,8 @@ error, or latency guardrails.
 | A | Baseline RAG with `top_k=5` | Control |
 | B | Narrower RAG with `top_k=3` | Treatment |
 
-Variant A reflects the current Milestone 6 RAG configuration migrated into the
-Final Project service. Variant B tests whether reducing retrieved context lowers
+Variant A reflects the current baseline RAG configuration in the service.
+Variant B tests whether reducing retrieved context lowers
 noise and response time while keeping enough evidence for grounded answers.
 
 ## Hypothesis

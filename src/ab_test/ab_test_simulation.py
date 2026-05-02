@@ -1,8 +1,8 @@
-"""Offline A/B test simulation for Final Project Component 2.
+"""Offline A/B test simulation for the final project.
 
 The experiment compares two RAG variants:
 
-- Control A: current Milestone 6 RAG configuration, top_k=5.
+- Control A: baseline RAG configuration, top_k=5.
 - Treatment B: narrower-context RAG configuration, top_k=3.
 
 The script is intentionally self-contained. It does not call the local API,

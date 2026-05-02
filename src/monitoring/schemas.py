@@ -3,28 +3,17 @@ from __future__ import annotations
 
 from typing import Any
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, Field
 
 
 class RAGQueryRequest(BaseModel):
     """Request body for a grounded RAG query."""
 
-    model_config = ConfigDict(
-        json_schema_extra={
-            "example": {
-                "query": "How does RAG reduce hallucination?",
-                "top_k": 5,
-                "model": "qwen2.5:7b",
-                "skip_generation": False,
-            }
-        }
-    )
-
     query: str = Field(
         ...,
         min_length=1,
         max_length=4096,
-        description="Question to answer using the Milestone 6 knowledge base.",
+        description="Question to answer using the local knowledge base.",
     )
     top_k: int = Field(
         default=5,
@@ -55,23 +44,11 @@ class RAGQueryResponse(BaseModel):
 class AgentRunRequest(BaseModel):
     """Request body for one multi-tool agent task."""
 
-    model_config = ConfigDict(
-        json_schema_extra={
-            "example": {
-                "task": "Explain why grounding reduces hallucination and cite evidence.",
-                "top_k": 5,
-                "model": "qwen2.5:7b",
-                "dry_run": False,
-                "plan_only": False,
-            }
-        }
-    )
-
     task: str = Field(
         ...,
         min_length=1,
         max_length=4096,
-        description="Task for the migrated Milestone 6 multi-tool agent.",
+        description="Task for the local multi-tool agent.",
     )
     task_id: str = Field(
         default="api_task",
