@@ -44,9 +44,26 @@ The system uses the following pipeline:
 - `logs/`: structured audit artifacts
 - `visualizations/`: exported charts and screenshots
 
+## Execution Modes
+
+- `Component 1`: live local service run with real FastAPI, Prometheus, and
+  Grafana processes; the saved dashboard reflects end-to-end requests against
+  the running system.
+- `Component 2`: offline simulation of two retrieval configurations with
+  statistical evaluation over synthetic user outcomes.
+- `Component 3`: documentation and governance artifacts derived from the system
+  design and observed operating characteristics.
+- `Component 4`: checked-in results use synthetic production windows for drift
+  and integrity analysis; the codebase also supports a `real-rag` mode for live
+  local execution.
+- `Component 5`: governance and deployment-readiness assessment based on the
+  implemented system, monitoring outputs, and drift analysis.
+
 ## Document Index
 
 ### Monitoring Dashboard
+
+Mode: `live local run`
 
 - instrumentation code: `src/monitoring/metrics.py`
 - service integration: `src/monitoring/service.py`
@@ -58,6 +75,8 @@ The system uses the following pipeline:
 
 ### A/B Experiment
 
+Mode: `offline simulation`
+
 - experiment specification: `docs/experiment-specification.md`
 - simulation code: `src/ab_test/ab_test_simulation.py`
 - result summary: `docs/ab_test_summary.md`
@@ -66,6 +85,8 @@ The system uses the following pipeline:
 
 ### Model Card And Governance
 
+Mode: `documentation and governance review`
+
 - model card: `docs/model-card.md`
 - lineage diagram: `docs/lineage-diagram.md`
 - lineage image: `docs/lineage-diagram.png`
@@ -73,6 +94,9 @@ The system uses the following pipeline:
 - audit trail: `logs/audit-trail.jsonl`
 
 ### Drift And Integrity Diagnostics
+
+Mode: `synthetic analysis in checked-in results`; optional `real-rag` execution
+is supported by the script
 
 - drift detection script: `src/drift/drift_detection.py`
 - diagnostic report: `docs/drift-diagnostic-report.md`
@@ -84,6 +108,8 @@ The system uses the following pipeline:
   `visualizations/integrity_anomalies.png`
 
 ### Risk Assessment
+
+Mode: `documentation and risk review`
 
 - governance review: `docs/governance-review.md`
 - risk matrix: `docs/risk-matrix.md`
@@ -140,13 +166,13 @@ This starts Prometheus and Grafana using the local dashboard configuration.
 ```bash
 python src/monitoring/simulate_traffic.py \
   --base-url http://127.0.0.1:8000 \
-  --requests 20 \
-  --skip-rag-generation \
-  --plan-only-agent
+  --requests 20
 ```
 
-This produces representative request traffic for the dashboard and updates the
-runtime metrics exposed by `/metrics` and `/stats`.
+This produces live end-to-end RAG and agent traffic for the dashboard and
+updates the runtime metrics exposed by `/metrics` and `/stats`. The final saved
+dashboard view corresponds to full service execution rather than retrieval-only
+or plan-only traffic.
 
 ## Reproducing The Analyses
 

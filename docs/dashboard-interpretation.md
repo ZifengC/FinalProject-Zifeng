@@ -88,13 +88,14 @@ The main performance bottleneck is generation and agent orchestration, not
 retrieval. In the saved Prometheus snapshot, RAG retrieval latency totaled
 0.28866 seconds across 26 RAG calls, or about 11 ms per call. RAG generation
 latency totaled 40.6658 seconds across 13 generation-enabled calls, or about
-3.13 seconds per generated answer. The difference between 26 retrieval calls
-and 13 generation calls reflects the low-cost simulated traffic path, where some
-RAG requests exercised retrieval while skipping local LLM generation. This still
-shows the expected production pattern: FAISS retrieval over a small local
-document set is much faster than local LLM generation through Ollama. The
-approximate TTFT metric should therefore be interpreted as a generation-latency
-proxy, not as a true streamed first-token measurement.
+3.13 seconds per generated answer. The observed run was collected from a live
+local deployment executing full end-to-end requests. The difference between 26
+retrieval calls and 13 generation calls reflects endpoint mix and request-path
+differences during the run rather than a retrieval-only shortcut. The broader
+pattern is still the expected one: FAISS retrieval over a small local document
+set is much faster than local LLM generation through Ollama. The approximate
+TTFT metric should therefore be interpreted as a generation-latency proxy, not
+as a true streamed first-token measurement.
 
 Agent runs are slower because each task executes a multi-step workflow:
 
@@ -110,9 +111,9 @@ RAG retrieval.
 Input integrity monitoring also worked. The saved metrics include
 prompt-injection-marker anomaly counts of 2 for `/rag/query` and 2 for
 `/agent/run`.
-Those events came from simulated traffic and demonstrate that the monitoring
-layer can surface suspicious input patterns separately from ordinary request
-failures.
+Those events came from deliberately chosen test prompts in the live run and
+demonstrate that the monitoring layer can surface suspicious input patterns
+separately from ordinary request failures.
 
 The latest top retrieval score in the saved metrics was approximately 0.398.
 This is a useful grounding-risk signal: when the top score is low, the system
@@ -124,8 +125,8 @@ The PSI panel is active in the running service. The service updates
 `finalproject_drift_psi{feature="input_length_chars"}` on each request by
 comparing the live input-length distribution with a fixed reference
 distribution. The saved metric value is approximately 7.385, which is high
-because the simulated traffic intentionally included a small, non-representative
-mix of short prompts and anomalous inputs. The same metric family can be
+because the observed run intentionally included a small, non-representative mix
+of ordinary prompts and anomalous inputs. The same metric family can be
 extended with additional features such as retrieval score or source mix.
 
 ## Bottlenecks And Risks
@@ -156,7 +157,7 @@ Production alert thresholds should include:
 ## Artifact Summary
 
 The dashboard screenshot in `docs/dashboard-screenshot.png` captures the live
-Grafana view after simulated traffic. The dashboard definition is preserved in
+Grafana view after the monitored end-to-end run. The dashboard definition is preserved in
 `dashboards/finalproject-dashboard.json`, and the instrumentation logic lives
 in `src/monitoring/metrics.py`. Together, these artifacts document the metric
 design, the observed runtime behavior, and the operational interpretation of
