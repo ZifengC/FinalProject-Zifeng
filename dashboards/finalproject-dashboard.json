@@ -1,0 +1,157 @@
+{
+  "title": "FinalProject RAG/Agent Monitoring",
+  "timezone": "browser",
+  "schemaVersion": 39,
+  "version": 1,
+  "refresh": "5s",
+  "tags": ["ids568", "rag", "agent", "monitoring"],
+  "panels": [
+    {
+      "type": "timeseries",
+      "title": "Request Throughput",
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 0},
+      "targets": [
+        {
+          "expr": "sum by (endpoint, status) (rate(finalproject_requests_total[1m]))",
+          "legendFormat": "{{endpoint}} {{status}}"
+        }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Error Rate",
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 0},
+      "targets": [
+        {
+          "expr": "sum by (endpoint, error_type) (rate(finalproject_errors_total[1m]))",
+          "legendFormat": "{{endpoint}} {{error_type}}"
+        }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "P95 Endpoint Latency",
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 8},
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.95, sum by (le, endpoint) (rate(finalproject_request_latency_seconds_bucket[5m])))",
+          "legendFormat": "{{endpoint}} p95"
+        }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "RAG Retrieval and Generation Latency",
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 8},
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.95, sum by (le) (rate(finalproject_rag_retrieval_latency_seconds_bucket[5m])))",
+          "legendFormat": "retrieval p95"
+        },
+        {
+          "expr": "histogram_quantile(0.95, sum by (le) (rate(finalproject_rag_generation_latency_seconds_bucket[5m])))",
+          "legendFormat": "generation p95"
+        }
+      ]
+    },
+    {
+      "type": "stat",
+      "title": "Top Retrieval Score",
+      "gridPos": {"h": 6, "w": 8, "x": 0, "y": 16},
+      "targets": [
+        {
+          "expr": "finalproject_rag_top_retrieval_score",
+          "legendFormat": "top score"
+        }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Input Integrity Anomalies",
+      "gridPos": {"h": 6, "w": 8, "x": 8, "y": 16},
+      "targets": [
+        {
+          "expr": "sum by (endpoint, anomaly_type) (rate(finalproject_input_integrity_anomalies_total[5m]))",
+          "legendFormat": "{{endpoint}} {{anomaly_type}}"
+        }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Drift PSI",
+      "gridPos": {"h": 6, "w": 8, "x": 16, "y": 16},
+      "targets": [
+        {
+          "expr": "finalproject_drift_psi",
+          "legendFormat": "{{feature}}"
+        }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Agent Tool Steps",
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 22},
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.95, sum by (le) (rate(finalproject_agent_tool_steps_bucket[5m])))",
+          "legendFormat": "tool steps p95"
+        }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Input Length",
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 22},
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.95, sum by (le, endpoint) (rate(finalproject_input_length_chars_bucket[5m])))",
+          "legendFormat": "{{endpoint}} p95 chars"
+        }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Component 4 Feature Drift PSI",
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 30},
+      "targets": [
+        {
+          "expr": "finalproject_component4_feature_drift_psi",
+          "legendFormat": "{{feature}} {{window}}"
+        }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Component 4 Label Drift",
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 30},
+      "targets": [
+        {
+          "expr": "finalproject_component4_label_distribution_drift",
+          "legendFormat": "{{window}}"
+        }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Component 4 Integrity Anomalies",
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 38},
+      "targets": [
+        {
+          "expr": "finalproject_component4_integrity_anomalies",
+          "legendFormat": "{{anomaly_type}} {{window}}"
+        }
+      ]
+    },
+    {
+      "type": "stat",
+      "title": "Component 4 Drift Alerts",
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 38},
+      "targets": [
+        {
+          "expr": "sum(finalproject_component4_drift_alert)",
+          "legendFormat": "active drift alerts"
+        }
+      ]
+    }
+  ]
+}

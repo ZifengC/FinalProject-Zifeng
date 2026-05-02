@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="420" viewBox="0 0 900 420">
+  <rect width="100%" height="100%" fill="white"/>
+  <text x="450.0" y="28" text-anchor="middle" font-size="20" font-family="Arial">Retrieval Score Drift PSI</text>
+  <line x1="60" y1="360" x2="840" y2="360" stroke="#475569"/>
+  <line x1="60" y1="60" x2="60" y2="360" stroke="#475569"/>
+  <line x1="60" y1="344.6" x2="840" y2="344.6" stroke="#f59e0b" stroke-dasharray="6 6"/>
+  <line x1="60" y1="321.6" x2="840" y2="321.6" stroke="#dc2626" stroke-dasharray="6 6"/>
+  <text x="848" y="344.6" font-size="12">PSI 0.10</text>
+  <text x="848" y="321.6" font-size="12">PSI 0.25</text>
+  <polyline points="60.0,354.8 255.0,346.6 450.0,170.4 645.0,60.0 840.0,306.4" fill="none" stroke="#2563eb" stroke-width="3"/>
+  <circle cx="60.0" cy="354.8" r="5" fill="#2563eb" /><text x="60.0" y="395" text-anchor="middle" font-size="12">w1_stable</text><text x="60.0" y="344.8" text-anchor="middle" font-size="12">0.034</text><circle cx="255.0" cy="346.6" r="5" fill="#2563eb" /><text x="255.0" y="395" text-anchor="middle" font-size="12">w2_longer_inputs</text><text x="255.0" y="336.6" text-anchor="middle" font-size="12">0.087</text><circle cx="450.0" cy="170.4" r="5" fill="#2563eb" /><text x="450.0" y="395" text-anchor="middle" font-size="12">w3_low_retrieval</text><text x="450.0" y="160.4" text-anchor="middle" font-size="12">1.234</text><circle cx="645.0" cy="60.0" r="5" fill="#2563eb" /><text x="645.0" y="395" text-anchor="middle" font-size="12">w4_integrity_spike</text><text x="645.0" y="50.0" text-anchor="middle" font-size="12">1.952</text><circle cx="840.0" cy="306.4" r="5" fill="#2563eb" /><text x="840.0" y="395" text-anchor="middle" font-size="12">w5_partial_recovery</text><text x="840.0" y="296.4" text-anchor="middle" font-size="12">0.348</text>
+</svg>

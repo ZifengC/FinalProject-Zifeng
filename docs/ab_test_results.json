@@ -1,0 +1,152 @@
+{
+  "experiment": {
+    "experiment_name": "rag_topk_context_ab_test",
+    "total_users": 20000,
+    "traffic_split_control": 0.5,
+    "alpha": 0.05,
+    "power": 0.8,
+    "minimum_detectable_effect": 0.05,
+    "max_recall_degradation": 0.05,
+    "max_error_rate_increase": 0.005,
+    "max_latency_degradation": 0.0,
+    "seed": 568,
+    "control": {
+      "name": "control",
+      "label": "A: baseline RAG top_k=5",
+      "top_k": 5,
+      "success_rate": 0.72,
+      "latency_mean_ms": 2914.23,
+      "latency_sd_ms": 650.0,
+      "groundedness_mean": 0.78,
+      "groundedness_sd": 0.08,
+      "recall_mean": 1.0,
+      "recall_sd": 0.015,
+      "error_rate": 0.01,
+      "business_value_mean": 1.0,
+      "business_value_sd": 0.22
+    },
+    "treatment": {
+      "name": "treatment",
+      "label": "B: narrower RAG top_k=3",
+      "top_k": 3,
+      "success_rate": 0.77,
+      "latency_mean_ms": 2400.0,
+      "latency_sd_ms": 560.0,
+      "groundedness_mean": 0.82,
+      "groundedness_sd": 0.07,
+      "recall_mean": 0.96,
+      "recall_sd": 0.03,
+      "error_rate": 0.011,
+      "business_value_mean": 1.07,
+      "business_value_sd": 0.23
+    },
+    "required_sample_size_per_variant": 2340
+  },
+  "summary": {
+    "control": {
+      "n": 9909,
+      "successes": 7138,
+      "success_rate": 0.720355232616813,
+      "errors": 98,
+      "error_rate": 0.00988999899081643,
+      "avg_latency_ms": 2913.988828691074,
+      "p95_latency_ms": 3973.4797638530335,
+      "avg_groundedness_score": 0.7796140867731004,
+      "avg_recall_proxy": 0.9938649640175783,
+      "avg_business_value": 0.9977192957435993
+    },
+    "treatment": {
+      "n": 10091,
+      "successes": 7684,
+      "success_rate": 0.7614706173818254,
+      "errors": 110,
+      "error_rate": 0.010900802695471211,
+      "avg_latency_ms": 2402.166382049982,
+      "p95_latency_ms": 3323.694829649519,
+      "avg_groundedness_score": 0.8201569276429616,
+      "avg_recall_proxy": 0.9583660239503126,
+      "avg_business_value": 1.0728266381818035
+    }
+  },
+  "statistical_tests": [
+    {
+      "metric_name": "successful_answer_rate",
+      "test_type": "two_proportion_ztest",
+      "control_value": 0.720355232616813,
+      "treatment_value": 0.7614706173818254,
+      "difference": 0.04111538476501242,
+      "relative_lift": 0.05707654071679855,
+      "statistic": 6.6369255572718355,
+      "p_value": 3.202926812662099e-11,
+      "ci_lower": 0.028981186104509553,
+      "ci_upper": 0.053249583425515286,
+      "significant": true
+    },
+    {
+      "metric_name": "latency_ms",
+      "test_type": "welch_ttest_normal_approx",
+      "control_value": 2913.988828691074,
+      "treatment_value": 2402.166382049982,
+      "difference": -511.82244664109203,
+      "relative_lift": -0.1756432425552558,
+      "statistic": -59.87393577997197,
+      "p_value": 0.0,
+      "ci_lower": -528.5768749183796,
+      "ci_upper": -495.0680183638044,
+      "significant": true
+    },
+    {
+      "metric_name": "groundedness_score",
+      "test_type": "welch_ttest_normal_approx",
+      "control_value": 0.7796140867731004,
+      "treatment_value": 0.8201569276429616,
+      "difference": 0.04054284086986115,
+      "relative_lift": 0.052003730509375436,
+      "statistic": 38.15928623429928,
+      "p_value": 0.0,
+      "ci_lower": 0.03846045108112068,
+      "ci_upper": 0.042625230658601625,
+      "significant": true
+    },
+    {
+      "metric_name": "business_value",
+      "test_type": "welch_ttest_normal_approx",
+      "control_value": 0.9977192957435993,
+      "treatment_value": 1.0728266381818035,
+      "difference": 0.07510734243820416,
+      "relative_lift": 0.07527903164609714,
+      "statistic": 23.46080843911435,
+      "p_value": 0.0,
+      "ci_lower": 0.06883272122665847,
+      "ci_upper": 0.08138196364974985,
+      "significant": true
+    }
+  ],
+  "guardrails": [
+    {
+      "metric_name": "recall_proxy",
+      "control_value": 0.9938649640175783,
+      "treatment_value": 0.9583660239503126,
+      "threshold": 0.05,
+      "passed": true,
+      "reason": "relative degradation=3.57%"
+    },
+    {
+      "metric_name": "error_rate",
+      "control_value": 0.00988999899081643,
+      "treatment_value": 0.010900802695471211,
+      "threshold": 0.005,
+      "passed": true,
+      "reason": "absolute increase=0.0010"
+    },
+    {
+      "metric_name": "p95_latency_ms",
+      "control_value": 3973.4797638530335,
+      "treatment_value": 3323.694829649519,
+      "threshold": 0.0,
+      "passed": true,
+      "reason": "relative change=-16.35%"
+    }
+  ],
+  "recommendation": "SHIP_TREATMENT_GRADUALLY"
+}

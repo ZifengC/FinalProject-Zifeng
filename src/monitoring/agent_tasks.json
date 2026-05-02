@@ -1,0 +1,42 @@
+[
+  {
+    "id": "task_01",
+    "task": "Retrieve evidence about RAG and summarize the two-stage RAG pipeline."
+  },
+  {
+    "id": "task_02",
+    "task": "Explain why grounding reduces hallucination and cite the retrieved evidence."
+  },
+  {
+    "id": "task_03",
+    "task": "Extract the recommended chunk size and overlap settings for this project."
+  },
+  {
+    "id": "task_04",
+    "task": "Compare short-term and long-term LLM memory and explain how memory supports personalization."
+  },
+  {
+    "id": "task_05",
+    "task": "Extract the components of a basic LLM agent controller and summarize why traces matter."
+  },
+  {
+    "id": "task_06",
+    "task": "Explain the relationship between Ollama and Qwen in this project."
+  },
+  {
+    "id": "task_07",
+    "task": "List the personalization signals used by recommender systems and summarize how they support ranking."
+  },
+  {
+    "id": "task_08",
+    "task": "Explain personalization bias and recommend mitigation strategies based on the documents."
+  },
+  {
+    "id": "task_09",
+    "task": "Compare FAISS and Chroma as vector database options for a small RAG project."
+  },
+  {
+    "id": "task_10",
+    "task": "Create a concise implementation checklist for building this local RAG system."
+  }
+]
