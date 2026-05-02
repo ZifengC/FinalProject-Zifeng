@@ -1,5 +1,63 @@
 # Final Project
 
+## File Structure
+
+```text
+FinalProject/
+├── README.md
+├── requirements.txt
+├── dashboards/
+│   ├── docker-compose.yml
+│   ├── finalproject-dashboard.json
+│   └── prometheus.yml
+├── docs/
+│   ├── ab_test_results.json
+│   ├── ab_test_summary.md
+│   ├── cto-memo.md
+│   ├── dashboard-interpretation.md
+│   ├── dashboard-screenshot.png
+│   ├── drift-diagnostic-report.md
+│   ├── drift_results.json
+│   ├── experiment-specification.md
+│   ├── governance-review.md
+│   ├── lineage-diagram.md
+│   ├── lineage-diagram.png
+│   ├── model-card.md
+│   ├── recommendation-memo.md
+│   ├── risk-matrix.md
+│   ├── risk-register.md
+│   ├── system-boundary-diagram.md
+│   └── system-boundary-diagram.png
+├── logs/
+│   └── audit-trail.jsonl
+├── src/
+│   ├── ab_test/
+│   │   └── ab_test_simulation.py
+│   ├── drift/
+│   │   └── drift_detection.py
+│   └── monitoring/
+│       ├── agent_controller.py
+│       ├── agent_service.py
+│       ├── metrics.py
+│       ├── rag_pipeline.py
+│       ├── rag_service.py
+│       ├── schemas.py
+│       ├── service.py
+│       ├── simulate_traffic.py
+│       └── documents/
+└── visualizations/
+    ├── dashboard-screenshot.png
+    ├── input_length_drift.png
+    ├── input_length_drift.svg
+    ├── integrity_anomalies.png
+    ├── integrity_anomalies.svg
+    ├── response_length_drift.png
+    ├── response_length_drift.svg
+    ├── retrieval_score_drift.png
+    ├── retrieval_score_drift.svg
+    └── README.md
+```
+
 ## Overview
 
 This repository contains a local Retrieval-Augmented Generation (RAG) and
