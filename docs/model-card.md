@@ -63,7 +63,7 @@ The system-specific data is the local retrieval corpus:
 - Sensitivity: no internal, proprietary, or personal data is intentionally
   included.
 
-The corpus is small and curated for coursework, so it is not representative of
+The corpus is small and curated for focused evaluation, so it is not representative of
 a broad production knowledge base.
 
 ## Evaluation Data
@@ -143,7 +143,7 @@ monitoring and a rollback plan.
 - The system does not include a moderation layer.
 - The agent controller is rule-based and suitable for observability, not for
   broad autonomous planning.
-- The service is a coursework prototype and lacks production authentication,
+- The service is a prototype and lacks production authentication,
   rate limiting, tenant isolation, and incident response automation.
 
 ## Failure Modes
@@ -192,6 +192,6 @@ Recommended production controls:
 
 ## Approval Status
 
-This system is approved only for coursework demonstration. It is not approved
+This system is approved only for local prototype use. It is not approved
 for production, regulated, or user-facing deployment without additional
 security, privacy, monitoring, and human evaluation controls.

@@ -2,9 +2,8 @@
 
 ## Scope
 
-This governance review covers the complete Final Project RAG and agent system as
-required by Component 5 of Module 8. It focuses on the full operational
-boundary rather than only the base model.
+This governance review covers the complete Final Project RAG and agent system.
+It focuses on the full operational boundary rather than only the base model.
 
 System in scope:
 
@@ -16,7 +15,8 @@ System in scope:
 
 ## Data Security
 
-- The curated knowledge base is intentionally non-sensitive coursework content.
+- The curated knowledge base is intentionally non-sensitive educational
+  reference content.
 - The primary security concern is free-form user input, which may contain
   secrets, personal data, or confidential text.
 - Monitoring artifacts are mostly aggregate, but trace expansion or raw logging
@@ -24,7 +24,7 @@ System in scope:
 
 Current controls:
 
-- local-only coursework deployment
+- local-only prototype deployment
 - no intentional sensitive data in the corpus
 - documented out-of-scope and sensitive-data boundaries
 
@@ -105,7 +105,7 @@ Recommended controls:
 ## Compliance Concerns
 
 - prompts may contain PII
-- outputs may be misused outside coursework scope
+- outputs may be misused outside the intended low-risk educational scope
 - caches or traces may become regulated artifacts if personal data enters the system
 
 Current controls:
@@ -121,7 +121,7 @@ Recommended controls:
 
 ## Summary
 
-The system is acceptable as a local coursework prototype because the exposure is
-limited and the governance boundaries are documented. It is not ready for
+The system is acceptable as a local prototype because the exposure is limited
+and the governance boundaries are documented. It is not ready for
 production deployment without authentication, prompt screening, retrieval
 fallback behavior, and formal retention controls.

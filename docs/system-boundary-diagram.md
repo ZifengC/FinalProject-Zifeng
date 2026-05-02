@@ -50,11 +50,11 @@ Component 5 AI risk assessment.
 
 | Boundary Crossing | Data Exposed | Primary Risk | Current Controls | Recommended Controls |
 |---|---|---|---|---|
-| User -> FastAPI service | Raw prompt or task text | Prompt injection, PII submission, abuse | Input metrics, anomaly counting, local-only coursework deployment | Add authentication, rate limiting, prompt classification, and request rejection for unsafe inputs |
+| User -> FastAPI service | Raw prompt or task text | Prompt injection, PII submission, abuse | Input metrics, anomaly counting, local-only prototype deployment | Add authentication, rate limiting, prompt classification, and request rejection for unsafe inputs |
 | Service -> Retriever | User query and retrieval parameters | Query mismatch, coverage gaps, stale corpus | Retrieval latency and top-score monitoring; Component 4 drift analysis | Add source freshness checks, corpus review cadence, and low-score fallback behavior |
 | Retriever -> Prompt assembly | Retrieved chunks and metadata | Context injection, irrelevant evidence, long prompt growth | Grounded prompt structure, source metadata returned | Add minimum retrieval-score threshold and document allowlist review |
 | Prompt assembly -> LLM | Full combined prompt | Third-party-style trust risk even in local serving, sensitive data propagation, overlong prompts | Local Ollama deployment, observable latency metrics | Add prompt redaction, max prompt size policy, and sensitive-content screening |
-| LLM -> User | Generated answer | Hallucination, unsafe or unsupported advice | Grounded retrieval workflow, model card limitations, manual review only in coursework context | Add abstention templates, citation checks, and human review for high-impact use cases |
+| LLM -> User | Generated answer | Hallucination, unsafe or unsupported advice | Grounded retrieval workflow, model card limitations, manual review only in prototype context | Add abstention templates, citation checks, and human review for high-impact use cases |
 | Service -> Metrics / audit artifacts | Request statistics, traces, drift outputs | Sensitive content retention in logs or traces | Existing metrics are mostly aggregate; governance docs mention retention concerns | Redact raw content, define retention TTL, and restrict artifact access |
 
 ## Boundary-Driven Risk Notes

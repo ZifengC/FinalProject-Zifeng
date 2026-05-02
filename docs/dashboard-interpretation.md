@@ -1,16 +1,17 @@
-# Component 1: Production Monitoring Interpretation
+# Production Monitoring Interpretation
 
 ## Scope
 
-This component instruments the standalone FinalProject RAG/agent API and
-monitors it with Prometheus and Grafana. The monitored service exposes:
+This document describes the monitoring approach for the FinalProject RAG/agent
+API and interprets the observed system behavior from the saved dashboard run.
+The monitored service exposes:
 
 - `POST /rag/query`
 - `POST /agent/run`
 - `GET /metrics`
 - `GET /stats`
 
-Evidence files for this submission are stored in:
+Related artifacts:
 
 - `docs/dashboard-screenshot.png`
 - `visualizations/dashboard-screenshot.png`
@@ -49,15 +50,14 @@ The service records:
 - Input-length PSI drift gauge: `finalproject_drift_psi`
 - Cache placeholder counter: `finalproject_cache_events_total`
 
-For the Component 1 dashboard requirement, input integrity anomalies, top
-retrieval score, and input-length PSI are the active model/data-health signals.
-The PSI gauge can also receive additional Component 4 drift-detector outputs
-without redesigning the dashboard.
+Input integrity anomalies, top retrieval score, and input-length PSI are the
+primary model and data-health signals on the dashboard. The PSI gauge can also
+receive additional drift-detector outputs without redesigning the monitoring
+layout.
 
-The TTFT metric follows the Module 8 non-streaming caveat: because the Ollama
-call is not streamed, total generation latency is used as the closest
-observable TTFT proxy. Token volume is also estimated from prompt and response
-text length rather than returned by the model runtime.
+Because the Ollama call is not streamed, total generation latency is used as
+the closest observable TTFT proxy. Token volume is also estimated from prompt
+and response text length rather than returned directly by the model runtime.
 
 ## Observed Run
 
@@ -120,14 +120,13 @@ may still generate an answer, but the retrieved evidence may be weakly related
 to the user task. In production, this should trigger either a fallback response,
 additional retrieval, or manual review depending on the use case.
 
-The PSI panel is active in this Component 1 submission. The service updates
+The PSI panel is active in the running service. The service updates
 `finalproject_drift_psi{feature="input_length_chars"}` on each request by
 comparing the live input-length distribution with a fixed reference
 distribution. The saved metric value is approximately 7.385, which is high
 because the simulated traffic intentionally included a small, non-representative
-mix of short prompts and anomalous inputs. In Component 4, the same metric
-family can be extended with additional features such as retrieval score or
-source mix.
+mix of short prompts and anomalous inputs. The same metric family can be
+extended with additional features such as retrieval score or source mix.
 
 ## Bottlenecks And Risks
 
@@ -154,14 +153,11 @@ Production alert thresholds should include:
 - Top retrieval score persistently below 0.20
 - Drift PSI above 0.20 for query length, retrieval score, or source mix
 
-## Evidence Summary
+## Artifact Summary
 
-The screenshot in `docs/dashboard-screenshot.png` is the dashboard evidence for
-the assignment. The dashboard export is preserved in
-`dashboards/finalproject-dashboard.json`. The interpretation in this document
-and the submission-facing monitoring code together provide the Component 1
-evidence package.
-
-These files collectively satisfy the Component 1 evidence requirement: the
-screenshot shows the live dashboard after simulated traffic, and the raw JSON
-and Prometheus snapshots preserve the underlying request and metric values.
+The dashboard screenshot in `docs/dashboard-screenshot.png` captures the live
+Grafana view after simulated traffic. The dashboard definition is preserved in
+`dashboards/finalproject-dashboard.json`, and the instrumentation logic lives
+in `src/monitoring/metrics.py`. Together, these artifacts document the metric
+design, the observed runtime behavior, and the operational interpretation of
+the system.

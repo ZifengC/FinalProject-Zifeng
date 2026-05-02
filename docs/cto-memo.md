@@ -1,4 +1,4 @@
-# CTO Memo: Component 5 AI Risk Assessment
+# CTO Memo: AI Risk Assessment
 
 ## To
 
@@ -14,19 +14,19 @@ Launch decision for the Final Project RAG and agent assistant
 
 ## Executive Decision
 
-The system is acceptable for `local coursework demonstration` but is `not
+The system is acceptable for `local prototype use` but is `not
 approved for production deployment` in its current form.
 
 Formal gate decision:
 
-- Coursework prototype: `PROCEED WITH CONDITIONS`
+- Local prototype: `PROCEED WITH CONDITIONS`
 - Real production launch: `BLOCK LAUNCH`
 
 ## What We Reviewed
 
 The assessment reviewed the deployed FastAPI backbone, the local RAG pipeline,
-the agent workflow, Component 1 monitoring evidence, Component 3 governance
-artifacts, and Component 4 drift diagnostics.
+the agent workflow, monitoring results, governance artifacts, and drift
+diagnostics.
 
 The current system already has meaningful strengths:
 
@@ -56,8 +56,8 @@ The key blockers are:
 ## Highest-Priority Risks
 
 - `Prompt injection`: monitored but not actively prevented
-- `Knowledge base staleness / retrieval degradation`: evidenced by Component 4
-  drift windows and low-score spikes
+- `Knowledge base staleness / retrieval degradation`: supported by the drift
+  windows and low-score spikes
 - `PII or confidential data in prompts and artifacts`: possible even with a
   non-sensitive corpus
 - `Hallucinated unsupported answer`: still possible when retrieval quality is low
@@ -78,7 +78,7 @@ Before any real-user deployment, I would require the following controls:
 
 ## Final Recommendation
 
-Ship Component 5 as a well-documented risk package for the final project. Do
-not represent the system as production-ready. The correct executive posture is
-that observability and governance foundations are in place, but several
-mandatory operational controls remain incomplete.
+Treat this system as a well-documented local prototype rather than a
+production-ready service. The correct executive posture is that observability
+and governance foundations are in place, but several mandatory operational
+controls remain incomplete.

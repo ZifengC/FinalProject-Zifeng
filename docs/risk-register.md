@@ -6,7 +6,7 @@ Likelihood and severity are scored from 1 low to 5 high. Risk score is
 
 | ID | Category | NIST Function | Risk | Likelihood | Severity | Score | Current Controls | Mitigation Plan | Owner |
 |---|---|---|---|---:|---:|---:|---|---|---|
-| R1 | Bias | Map / Measure | Small curated corpus may underrepresent alternative viewpoints or omit important caveats. | 3 | 3 | 9 | Curated non-sensitive course documents; source metadata returned. | Expand corpus review checklist; add source freshness and coverage review before deployment. | Project owner |
+| R1 | Bias | Map / Measure | Small curated corpus may underrepresent alternative viewpoints or omit important caveats. | 3 | 3 | 9 | Curated non-sensitive reference documents; source metadata returned. | Expand corpus review checklist; add source freshness and coverage review before deployment. | Project owner |
 | R2 | Bias | Measure | Personalization or recommender answers may be interpreted as fairness-certified guidance. | 2 | 4 | 8 | Intended-use boundaries in model card. | Add explicit disclaimers for fairness-sensitive topics; require human review for high-impact recommendation use cases. | Project owner |
 | R3 | Robustness | Measure / Manage | Retriever may return irrelevant chunks, causing noisy or unsupported generation. | 3 | 4 | 12 | Retrieval metrics; average recall@5 measured at 1.00; source metadata included. | Track retrieval score and source mix; evaluate top-k changes; add abstention when retrieval score is low. | ML owner |
 | R4 | Robustness | Measure / Manage | LLM may hallucinate or over-expand beyond retrieved context. | 3 | 4 | 12 | Grounded prompts; manual hallucination review; monitoring of retrieval score. | Add citation checking, answer support scoring, and human review for important outputs. | ML owner |
@@ -29,6 +29,6 @@ operational reliability.
 
 ## Risk Acceptance
 
-For coursework demonstration, these risks are acceptable because the system runs
+For local prototype use, these risks are acceptable because the system runs
 locally, uses non-sensitive documents, and is not exposed to real users. For
 production, risks R3, R4, R6, R7, R9, and R11 require mitigation before launch.
